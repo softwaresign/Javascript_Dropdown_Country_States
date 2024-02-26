@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Dropdown Menu Creation Process</title>
+    <style>
+        /*This  * and body will show us styling of main page */
+        *{
+            margin: 0; 
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+        }
+        
+        /* starts dropdown styling*/
+        select{
+            background-color: rgb(87, 190, 250);
+            cursor: pointer;
+            box-shadow: 2px 4px 8px rgba(0, 255, 179, 0.246);
+            border-radius: 25px;
+            outline:none;
+            border: none;
+            width: 300px;
+            height: 40px;
+        }
+
+    </style>
+</head>
+<body>
+       <div id="wrapper">
+
+        <!-- Dropdown1 will starts -->
+            <select id="countries">
+                <option value="-1">-- Select Country --</option>
+                <option value="US">America</option>
+                <option value="IND">India</option>
+                <option value="JP">Japan</option>
+            </select>
+           <!-- Dropdown2 will starts  -->
+            <select id="states">
+                <option value="-1">-- Select State --</option>
+            </select>
+
+       </div>
+       <script>
+        let country_states = [
+            {
+                country:"India",
+                code:"IND",
+                states:["Andhra Pradesh", "Bihar", "Telangana", "TamilNadu", "Karnataka", "Kerla"]
+            },
+            {
+                country:"America",
+                code:"US",
+                states:["California", "Texas", "Florida", "Alasaka", "Alabama", "Georgia","Nevada","Washington"]
+            },
+            {
+                country:"Japan",
+                code:"JP",
+                states:["Hokkaido", "Tohoku", "Kanto", "Chubu", "Chugoku","Kyushu-Okinawa"]
+            }
+        ]
+
+        // variable declaration starts
+
+               let countryselect = document.querySelector("#countries");
+               let stateselect = document.querySelector("#states");
+
+        // event onchange selected here  and also when event happened call the function 
+               countryselect.onchange = function(){ 
+                stateselect.options.length=0;
+                if(countryselect.value!=-1){
+                    for(ele of country_states){
+                        if(countryselect.value==ele.code){
+                           let states= ele.states;
+                           let op = document.createElement('option');
+                           op.value =-1;
+                           op.innerText = "-- Select State --"
+                           stateselect.options[0] = op
+                           let i=1
+                           for(state of states){
+                            let op = document.createElement('option');
+                            op.value =state;
+                            op.innerText =state;
+                            stateselect.options[i] = op;
+                            i++
+                           }
+                        }
+                    }
+
+               }
+            }
+
+       </script>
+</body>
+</html>
